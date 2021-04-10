@@ -1,21 +1,25 @@
 version: '3.9'
 services:
-  mysql:
+  postgres:
     image: postgres:13
     environment:
-      MYSQL_DATABASE: test
-      MYSQL_ROOT_PASSWORD: secret
+      POSTGRES_DB: test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_PORT: 5432
     ports:
       - "5432:5432"
+    container_name: postgres
 
-  php-fpm:
+  app:
     image: webdevops/php:7.3
     hostname: php-fpm
     volumes:
       - "./:/app"
     working_dir: "/app"
     depends_on:
-      - mysql
+      - postgres
+    container_name: app
 
   nginx:
     image: webdevops/nginx
@@ -29,4 +33,5 @@ services:
     volumes:
       - "./:/app"
     depends_on:
-      - php-fpm
+      - app
+    container_name: nginx
