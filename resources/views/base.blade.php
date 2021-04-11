@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title> @yield('title-page')</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -22,14 +21,6 @@
                 </svg>
                 <strong>@yield('title-page')</strong>
             </a>
-            <a class="navbar-toggler" type="button"
-               data-toggle="collapse" data-target="#navbarHeader"
-               aria-controls="navbarHeader" aria-expanded="false"
-               aria-label="Toggle navigation"
-               href="{{route('products.create')}}"
-            >
-                Add product
-            </a>
         </div>
     </div>
 </header>
@@ -40,10 +31,10 @@
     </div>
 </main>
 
-<footer class="text-muted h-100">
+<footer class="footer fixed-bottom bg-dark box-shadow">
     <div class="container text-center">
         <p class="mt-3">
-            <a href="#">Link do developer sites</a>
+            <a href="#">Link to developer sites</a>
         </p>
     </div>
 </footer>

@@ -52,6 +52,9 @@ class ProductController extends Controller
      */
     public function show(Product $product): View
     {
+        if($product->status == Product::STATUS_UNAVAILABLE){
+            abort(404);
+        }
         return view('product.show', [
             'product' => $product
         ]);
@@ -65,6 +68,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product): View
     {
+        if($product->status == Product::STATUS_UNAVAILABLE){
+            abort(404);
+        }
         return view('product.form', [
             'product' => $product,
             'statuses' => Product::STATUSES

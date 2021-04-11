@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Validation\Rule;
 
 class ProductRequest extends FormRequest
 {
@@ -24,14 +24,12 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-
-        if($this->getMethod() == Request::METHOD_PUT){
-            return [
-                'name' => 'required|string|min:10',
-            ];
-        }
         return [
-            'art' => 'required|unique:products|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+            'art' => [
+                'required',
+                'regex:/^[a-z0-9]+$/i',
+                Rule::unique('products')->ignore($this->product),
+            ],
             'name' => 'required|string|min:10',
         ];
     }

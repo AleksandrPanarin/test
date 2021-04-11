@@ -1,11 +1,10 @@
 @extends('base')
 
-@section('title', 'Product '.$product->name)
+@section('title-page', 'Product '.$product->name)
 
 @section('content')
     <div class="d-flex justify-content-center">
         <div class="mt-3">
-            <a type="button" class="btn btn-secondary" href="{{ route('products.index') }}">Back to products</a>
             <div class="card mt-3" style="width: 18rem;">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Id: {{$product->id}}</li>
@@ -23,6 +22,7 @@
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger" type="submit">Delete</button>
+                <a type="button" class="btn btn-secondary" href="{{ route('products.index') }}">Back to products</a>
             </form>
         </div>
     </div>

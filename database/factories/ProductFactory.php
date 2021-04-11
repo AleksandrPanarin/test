@@ -23,7 +23,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'art' => $this->faker->uuid,
+            'art' => $this->faker->unique()->regexify('[a-z0-9]{5,10}'),
             'name' => $this->faker->realTextBetween(10,20),
             'status' => $this->faker->randomElement([Product::STATUS_AVAILABLE, Product::STATUS_UNAVAILABLE]),
             'data' => [
