@@ -40,8 +40,9 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $request->except('_token');
-        Product::create($request->all());
-        return redirect()->route('products.index')->withSuccess('Created product '.$request->name);
+        $product = Product::create($request->all());
+        \App\Jobs\SendNotification::dispatch($product);
+        return redirect()->route('products.index')->withSuccess('Created product ' . $request->name);
     }
 
     /**
@@ -52,7 +53,7 @@ class ProductController extends Controller
      */
     public function show(Product $product): View
     {
-        if($product->status == Product::STATUS_UNAVAILABLE){
+        if ($product->status == Product::STATUS_UNAVAILABLE) {
             abort(404);
         }
         return view('product.show', [
@@ -68,7 +69,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product): View
     {
-        if($product->status == Product::STATUS_UNAVAILABLE){
+        if ($product->status == Product::STATUS_UNAVAILABLE) {
             abort(404);
         }
         return view('product.form', [
@@ -88,7 +89,7 @@ class ProductController extends Controller
     {
         $request->except('_token');
         $product->update($request->all());
-        return redirect()->route('products.index')->withSuccess('Updated product '.$product->name);
+        return redirect()->route('products.index')->withSuccess('Updated product ' . $product->name);
     }
 
     /**
